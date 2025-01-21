@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { loginUser } from "@/services/authService";
+import { signUpUser } from "@/services/authService";
 
-export const LoginForm = () => {
+export const SignUpForm = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -16,18 +17,18 @@ export const LoginForm = () => {
     setIsLoading(true);
 
     try {
-      const response = await loginUser({ email, password });
+      const response = await signUpUser({ name, email, password });
       toast({
-        title: "Login successful!",
-        description: "Welcome back!",
+        title: "Registration successful!",
+        description: "Your account has been created.",
       });
       // Here you would typically store the token and redirect
-      console.log('Login successful:', response);
+      console.log('Registration successful:', response);
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Login failed",
-        description: "Please check your credentials and try again.",
+        title: "Registration failed",
+        description: "Please check your information and try again.",
       });
     } finally {
       setIsLoading(false);
@@ -37,13 +38,27 @@ export const LoginForm = () => {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">Welcome Back</CardTitle>
+        <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
         <CardDescription className="text-center">
-          Enter your credentials to access your account
+          Enter your information to create a new account
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <label htmlFor="name" className="text-sm font-medium">
+              Name
+            </label>
+            <Input
+              id="name"
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="w-full"
+            />
+          </div>
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium">
               Email
@@ -65,7 +80,7 @@ export const LoginForm = () => {
             <Input
               id="password"
               type="password"
-              placeholder="Enter your password"
+              placeholder="Create a password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -77,15 +92,15 @@ export const LoginForm = () => {
             className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
             disabled={isLoading}
           >
-            {isLoading ? "Logging in..." : "Login"}
+            {isLoading ? "Creating account..." : "Sign Up"}
           </Button>
         </form>
       </CardContent>
       <CardFooter className="flex justify-center">
         <p className="text-sm text-gray-500">
-          Don't have an account?{" "}
-          <a href="/signup" className="text-blue-600 hover:underline">
-            Sign up
+          Already have an account?{" "}
+          <a href="/" className="text-blue-600 hover:underline">
+            Login
           </a>
         </p>
       </CardFooter>
