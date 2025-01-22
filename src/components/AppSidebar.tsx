@@ -1,4 +1,5 @@
-import { Calendar, Home, Users, MessageSquare, FileText, Settings } from "lucide-react"
+import { Building2, Home, Package, Users, Boxes, Building, Factory } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import {
   Sidebar,
   SidebarContent,
@@ -10,24 +11,47 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-const menuItems = [
-  { title: "Dashboard", icon: Home, url: "/dashboard" },
-  { title: "Contatos", icon: Users, url: "/contacts" },
-  { title: "Calendário", icon: Calendar, url: "/calendar" },
-  { title: "Mensagens", icon: MessageSquare, url: "/messages" },
-  { title: "Documentos", icon: FileText, url: "/documents" },
-  { title: "Configurações", icon: Settings, url: "/settings" },
-]
-
 export function AppSidebar() {
+  const { t } = useTranslation()
+
+  const menuItems = [
+    { title: t('menu.dashboard'), icon: Home, url: "/dashboard" },
+  ]
+
+  const recordsItems = [
+    { title: t('menu.products'), icon: Package, url: "/products" },
+    { title: t('menu.categories'), icon: Boxes, url: "/categories" },
+    { title: t('menu.company'), icon: Building, url: "/company" },
+    { title: t('menu.clients'), icon: Users, url: "/clients" },
+    { title: t('menu.suppliers'), icon: Factory, url: "/suppliers" },
+  ]
+
   return (
-    <Sidebar>
+    <Sidebar className="bg-[#f3f3f3] dark:bg-gray-800">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild tooltip={item.title}>
+                    <a href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>{t('menu.records')}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {recordsItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild tooltip={item.title}>
                     <a href={item.url}>

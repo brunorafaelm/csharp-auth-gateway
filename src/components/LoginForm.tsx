@@ -4,12 +4,14 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { loginUser } from "@/services/authService";
+import { useTranslation } from "react-i18next";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,21 +39,21 @@ export const LoginForm = () => {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">Welcome Back</CardTitle>
+        <CardTitle className="text-2xl font-bold text-center">{t('welcome_back')}</CardTitle>
         <CardDescription className="text-center">
-          Enter your credentials to access your account
+          {t('enter_credentials')}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium">
-              Email
+              {t('email')}
             </label>
             <Input
               id="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder={t('email')}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -60,12 +62,12 @@ export const LoginForm = () => {
           </div>
           <div className="space-y-2">
             <label htmlFor="password" className="text-sm font-medium">
-              Password
+              {t('password')}
             </label>
             <Input
               id="password"
               type="password"
-              placeholder="Enter your password"
+              placeholder={t('password')}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -77,15 +79,15 @@ export const LoginForm = () => {
             className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
             disabled={isLoading}
           >
-            {isLoading ? "Logging in..." : "Login"}
+            {isLoading ? "..." : t('login')}
           </Button>
         </form>
       </CardContent>
       <CardFooter className="flex justify-center">
         <p className="text-sm text-gray-500">
-          Don't have an account?{" "}
+          {t('dont_have_account')}{" "}
           <a href="/signup" className="text-blue-600 hover:underline">
-            Sign up
+            {t('signup')}
           </a>
         </p>
       </CardFooter>

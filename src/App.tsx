@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/hooks/use-theme"
 import Index from "./pages/Index"
 import SignUp from "./pages/SignUp"
 import Dashboard from "./pages/Dashboard"
+import "./i18n"
 
 const queryClient = new QueryClient()
 
