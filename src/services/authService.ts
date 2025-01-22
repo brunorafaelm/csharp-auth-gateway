@@ -1,3 +1,5 @@
+import { supabase } from "@/integrations/supabase/client";
+
 interface LoginCredentials {
   email: string;
   password: string;
@@ -20,19 +22,21 @@ interface LoginResponse {
 
 export const loginUser = async (credentials: LoginCredentials): Promise<LoginResponse> => {
   try {
-    const response = await fetch('YOUR_API_ENDPOINT/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: credentials.email,
+      password: credentials.password,
     });
 
-    if (!response.ok) {
-      throw new Error('Login failed');
-    }
+    if (error) throw error;
 
-    return await response.json();
+    return {
+      token: data.session?.access_token || '',
+      user: {
+        id: data.user?.id || '',
+        email: data.user?.email || '',
+        name: data.user?.email?.split('@')[0] || '', // Using email prefix as name since Supabase doesn't store names by default
+      },
+    };
   } catch (error) {
     console.error('Login error:', error);
     throw error;
@@ -41,19 +45,26 @@ export const loginUser = async (credentials: LoginCredentials): Promise<LoginRes
 
 export const signUpUser = async (credentials: SignUpCredentials): Promise<LoginResponse> => {
   try {
-    const response = await fetch('YOUR_API_ENDPOINT/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const { data, error } = await supabase.auth.signUp({
+      email: credentials.email,
+      password: credentials.password,
+      options: {
+        data: {
+          name: credentials.name,
+        },
       },
-      body: JSON.stringify(credentials),
     });
 
-    if (!response.ok) {
-      throw new Error('Registration failed');
-    }
+    if (error) throw error;
 
-    return await response.json();
+    return {
+      token: data.session?.access_token || '',
+      user: {
+        id: data.user?.id || '',
+        email: data.user?.email || '',
+        name: credentials.name,
+      },
+    };
   } catch (error) {
     console.error('Registration error:', error);
     throw error;
