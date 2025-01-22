@@ -26,12 +26,23 @@ export const LoginForm = () => {
       });
       // Here you would typically store the token and redirect
       console.log('Login successful:', response);
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Login failed",
-        description: "Please check your credentials and try again.",
-      });
+    } catch (error: any) {
+      const errorMessage = error?.message || "";
+      
+      if (errorMessage.includes("Email not confirmed")) {
+        toast({
+          variant: "destructive",
+          title: "Email not confirmed",
+          description: "Please check your email and confirm your account before logging in.",
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Login failed",
+          description: "Please check your credentials and try again.",
+        });
+      }
+      console.error('Login error:', error);
     } finally {
       setIsLoading(false);
     }
