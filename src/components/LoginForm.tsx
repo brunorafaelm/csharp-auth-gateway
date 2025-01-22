@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useToast } from "@/hooks/use-toast";
 import { loginUser } from "@/services/authService";
 import { useTranslation } from "react-i18next";
+import { LanguageSelector } from "./LanguageSelector";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -39,8 +40,11 @@ export const LoginForm = () => {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">{t('welcome_back')}</CardTitle>
-        <CardDescription className="text-center">
+        <div className="flex justify-between items-center">
+          <CardTitle className="text-2xl font-bold">{t('welcome_back')}</CardTitle>
+          <LanguageSelector />
+        </div>
+        <CardDescription>
           {t('enter_credentials')}
         </CardDescription>
       </CardHeader>
