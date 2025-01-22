@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { loginUser } from "@/services/authService";
 import { useTranslation } from "react-i18next";
 import { LanguageSelector } from "./LanguageSelector";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,7 @@ export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,8 +26,8 @@ export const LoginForm = () => {
         title: "Login successful!",
         description: "Welcome back!",
       });
-      // Here you would typically store the token and redirect
-      console.log('Login successful:', response);
+      // Redirect to dashboard after successful login
+      navigate("/dashboard");
     } catch (error: any) {
       const errorMessage = error?.message || "";
       
