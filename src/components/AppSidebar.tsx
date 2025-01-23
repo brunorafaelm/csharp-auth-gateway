@@ -63,7 +63,8 @@ export function AppSidebar() {
               </AccordionTrigger>
               <AccordionContent>
                 <SidebarMenu>
-                  {recordsItems.map((item) key={item.title}>
+                  {recordsItems.map((item) => (
+                    <SidebarMenuItem key={item.title}>
                       <SidebarMenuButton asChild tooltip={item.title}>
                         <a href={item.url}>
                           <item.icon />
