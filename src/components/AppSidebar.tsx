@@ -58,14 +58,12 @@ export function AppSidebar() {
             <AccordionItem value="records">
               <AccordionTrigger className="px-2">
                 <span className="flex items-center gap-2">
-                  <ChevronDown className="h-4 w-4" />
                   {t('menu.records')}
                 </span>
               </AccordionTrigger>
               <AccordionContent>
                 <SidebarMenu>
-                  {recordsItems.map((item) => (
-                    <SidebarMenuItem key={item.title}>
+                  {recordsItems.map((item) key={item.title}>
                       <SidebarMenuButton asChild tooltip={item.title}>
                         <a href={item.url}>
                           <item.icon />
