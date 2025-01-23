@@ -11,9 +11,9 @@ export const LanguageSelector = () => {
   const { i18n } = useTranslation();
 
   const languages = [
-    { code: "pt", flag: "🇧🇷", name: "Português" },
-    { code: "en", flag: "🇺🇸", name: "English" },
-    { code: "es", flag: "🇪🇸", name: "Español" },
+    { code: "pt", flag: "PT", name: "Português" },
+    { code: "en", flag: "EN", name: "English" },
+    { code: "es", flag: "ES", name: "Español" },
   ];
 
   const handleLanguageChange = (value: string) => {
@@ -27,7 +27,7 @@ export const LanguageSelector = () => {
       <SelectTrigger className="w-[120px]">
         <SelectValue>
           <span className="flex items-center gap-2">
-            <span className="text-lg">{currentLanguage?.flag}</span>
+            <span className="font-medium">{currentLanguage?.flag}</span>
             <span>{currentLanguage?.name}</span>
           </span>
         </SelectValue>
@@ -36,7 +36,7 @@ export const LanguageSelector = () => {
         {languages.map((language) => (
           <SelectItem key={language.code} value={language.code}>
             <span className="flex items-center gap-2">
-              <span className="text-lg">{language.flag}</span>
+              <span className="font-medium">{language.flag}</span>
               <span>{language.name}</span>
             </span>
           </SelectItem>
