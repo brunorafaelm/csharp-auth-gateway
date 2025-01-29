@@ -9,6 +9,9 @@ import SignUp from "./pages/SignUp"
 import Dashboard from "./pages/Dashboard"
 import Products from "./pages/Products"
 import ProductCreate from "./pages/ProductCreate"
+import Categories from "./pages/Categories"
+import CategoryCreate from "./pages/CategoryCreate"
+import CategoryEdit from "./pages/CategoryEdit"
 import "./i18n"
 
 const queryClient = new QueryClient()
@@ -26,6 +29,9 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/create" element={<ProductCreate />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/categories/create" element={<CategoryCreate />} />
+            <Route path="/categories/edit/:id" element={<CategoryEdit />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
