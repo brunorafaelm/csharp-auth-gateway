@@ -1,0 +1,18 @@
+{
+  "menu": {
+    "dashboard": "Dashboard",
+    "records": "Cadastros",
+    "products": "Produtos",
+    "categories": "Categorias",
+    "company": "Empresa",
+    "clients": "Clientes",
+    "suppliers": "Fornecedores"
+  },
+  "actions": {
+    "new": "Novo",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "save": "Salvar",
+    "cancel": "Cancelar"
+  }
+}
