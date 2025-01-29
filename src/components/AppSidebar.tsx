@@ -1,5 +1,6 @@
 import { Building2, Home, Package, Users, Boxes, Building, Factory } from "lucide-react"
 import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 import {
   Sidebar,
   SidebarContent,
@@ -16,7 +17,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Link } from "react-router-dom"
 
 export function AppSidebar() {
   const { t } = useTranslation()
