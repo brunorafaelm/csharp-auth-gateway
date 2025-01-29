@@ -8,6 +8,7 @@ import Index from "./pages/Index"
 import SignUp from "./pages/SignUp"
 import Dashboard from "./pages/Dashboard"
 import Products from "./pages/Products"
+import ProductCreate from "./pages/ProductCreate"
 import "./i18n"
 
 const queryClient = new QueryClient()
@@ -24,6 +25,7 @@ const App = () => (
             <Route path="/signup" element={<SignUp />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/products/create" element={<ProductCreate />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

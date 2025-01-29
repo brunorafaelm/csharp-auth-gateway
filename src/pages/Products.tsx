@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { Plus, Pencil, Trash } from "lucide-react"
 import { useTranslation } from "react-i18next"
+import { Link, useNavigate } from "react-router-dom"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/AppSidebar"
 import { Button } from "@/components/ui/button"
@@ -28,6 +29,7 @@ interface Product {
 
 export default function Products() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const [isEditing, setIsEditing] = useState(false)
 
   const { data: products, isLoading } = useQuery({
@@ -54,9 +56,9 @@ export default function Products() {
             <div className="flex items-center justify-between">
               <h1 className="text-3xl font-bold">{t('menu.products')}</h1>
               <div className="flex gap-2">
-                <Button variant="outline" onClick={() => setIsEditing(true)}>
+                <Button onClick={() => navigate("/products/create")}>
                   <Plus className="h-4 w-4 mr-2" />
-                  {t('actions.new')}
+                  Novo
                 </Button>
                 <SidebarTrigger />
               </div>
